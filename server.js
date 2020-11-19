@@ -1,11 +1,15 @@
-var orm = require("./config/orm.js");
-var inquirer = require("inquirer");
+// imported requirements
+
 var connection = require("./config/connection.js");
-const { title } = require("process");
+
+var inquirer = require("inquirer");
+
+var orm = require("./config/orm.js");
 
 //functions for handling responses
 
 function newDepartment() {
+
     inquirer.prompt(
         [{
             name: "name",
@@ -13,9 +17,9 @@ function newDepartment() {
             message: "enter new department name"
         }
         ]).then(response => {
-            connection.query(`INSERT INTO department (departmentname) VALUE (?)`,
-                [response.name],
-                function (err, res) {
+            connection.query(`INSERT INTO department (deptname) VALUE (?)`
+                ,[response.name]
+                ,function (err, res) {
                     if (err) throw err;
                     connection.end();
                 })
@@ -35,9 +39,9 @@ function newRoles() {
                         message: "enter department id",
                     }
                 ]).then(response => {
-                    connection.query("INSERT INTO jobs (title, departmentid) VALUES (?,?)",
-                        [response.job, response.department],
-                        function (err, res) { if (err) throw err; });
+                    connection.query("INSERT INTO jobs (title, departmentid) VALUES (?,?)"
+                        ,[response.job, response.department]
+                        ,function (err, res) { if (err) throw err; });
                     connection.end();
                 })};
 function newEmployee() {
@@ -58,10 +62,9 @@ function newEmployee() {
                         type: "input",
                         message: "enter employee role number"
                     }
-                ]).then(response => {
-                    connection.query("INSERT INTO employee (firstname, lastname, jobid) VALUES (?, ?, ?)",
-                        [response.first, response.last, response.job],
-                        function (err, res) {
+                ]).then(response => { connection.query("INSERT INTO employee (firstname, lastname, jobid) VALUES (?, ?, ?)"
+                        ,[response.first, response.last, response.job]
+                        ,function (err, res) {
                             if (err) throw err;
                         });
                     connection.end();
@@ -94,12 +97,14 @@ connection.query(employee, function (err, res) {
           message: "select new job",
           choices: jobs
         }
-      ]).then(response => { connection.query("UPDATE employee SET role_id = (?) WHERE id = (?)",
-        [response.employeeUpdate, resonse.roleUpdate]
+      ]).then(response => { connection.query("UPDATE employee SET role_id = (?) WHERE id = (?)"
+        ,[response.employeeUpdate, resonse.roleUpdate]
         ,function (err, res) {
         if (err) throw err;
          });
-        connection.end();
+        connection.end();});
+  });});
+}
 
 
 
@@ -131,16 +136,15 @@ inquirer.prompt(
                 newEmployee();
                 break;
             case "view departments":
-                orm.selectAll("departmentname", "department");
+                orm.viewAll("deptname", "department");
                 break;
             case "view roles":
-                orm.selectAll("title", "job");
+                orm.viewAll("title", "job");
                 break;
             case "view employees":
-                orm.selectAllEmployees()
+                orm.viewAllEmployees()
                 break;
             case "update employee roles":
                 updateEmployee();
                 break;
-        }
-    })}
+        }});
