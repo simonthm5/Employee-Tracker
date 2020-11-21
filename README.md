@@ -1,5 +1,5 @@
 # Employee-Tracker
-NU Coding Boot Camp Assignment #12
+NU Coding Bootcamp Assignment #12
 
 # Unit 12 MySQL Homework: Employee Tracker
 
