@@ -1,7 +1,7 @@
 # Employee-Tracker
 NU Coding Bootcamp Assignment #12
 
-This is assignment #3 the June - December 2020 cohort of Coding Bootcamp through Northwestern University and Trilogy Education Services.
+This is assignment #12 the June - December 2020 cohort of Coding Bootcamp through Northwestern University and Trilogy Education Services.
 
 Original Assignment Description is below:
 
